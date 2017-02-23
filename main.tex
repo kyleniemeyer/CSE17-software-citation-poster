@@ -37,7 +37,7 @@
 % \makeatletter
 % \def\TP@titlegraphictotitledistance{-4cm}
 % \settitle{ \centering \vbox{
-% \@titlegraphic \\ [\TP@titlegraphictotitledistance] 
+% \@titlegraphic \\ [\TP@titlegraphictotitledistance]
 % \centering
 % \color{titlefgcolor} {\bfseries \Huge \@title \par} % add \sc for smallcaps
 % \vspace*{2em}
@@ -67,12 +67,12 @@
 \newlength\LogoSep
 \setlength\LogoSep{-2cm}
 
-\insertlogoi[width=18cm]{OSU-color-horz}
-\insertlogoii[width=18cm]{UConn-color-horz}
+%\insertlogoi[width=18cm]{logo-CMYK-horizontal}
+%\insertlogoii[width=18cm]{OSU-color-horz}
 
 \def\TP@titlegraphictotitledistance{-4cm}
 \settitle{ \centering \vbox{
-%\@titlegraphic \\ [\TP@titlegraphictotitledistance] 
+%\@titlegraphic \\ [\TP@titlegraphictotitledistance]
 \centering
 \color{titlefgcolor} {\bfseries \Huge \@title \par} % add \sc for smallcaps
 \vspace*{2em}
@@ -107,13 +107,13 @@
         (title)
         {\parbox{\TP@titlewidth-2\TP@titleinnersep}{\TP@maketitle}};
 
-    \node[inner sep=0pt,anchor=west] 
-      at ([xshift=-\LogoSep]title.west)
-      {\@insertlogoi};
-
-    \node[inner sep=0pt,anchor=east] 
-      at ([xshift=\LogoSep]title.east)
-      {\@insertlogoii};
+    % \node[inner sep=0pt,anchor=west]
+    %   at ([xshift=-\LogoSep]title.west)
+    %   {\@insertlogoi};
+    %
+    % \node[inner sep=0pt,anchor=east]
+    %   at ([xshift=\LogoSep]title.east)
+    %   {\@insertlogoii};
 
     % Settings for blocks
     \normalsize
@@ -124,28 +124,22 @@
 \setlength{\columnsep}{2cm}
 
 
-\title{\parbox{0.7\linewidth}{\centering Minisymposterium: The Journal of Open Source Software}}
+\title{\parbox{0.7\linewidth}{\centering Software citation principles for credit and reuse}}
 
-\author[1]{Arfon M.\ Smith}
-% \author[2]{Lorena A.\ Barba}
-% \author[3]{George Githinji}
-% \author[4]{Melissa Gymrek}
-% \author[5]{Kathryn Huff}
-% \author[6]{Daniel S.\ Katz}
-% \author[7]{Christopher R.\ Madan}
-% \author[8]{Abigail Cabunoc Mayes}
-% \author[9]{Kevin M.\ Moerman}
-% \author[10]{Kyle E.\ Niemeyer}
-% \author[11]{Pjotr Prins}
-% \author[12]{Karthik Ram}
-% \author[13]{Tracy K.\ Teal}
-% \author[14]{Jake Vanderplas}
+\author[1]{Kyle E.\ Niemeyer}
+\author[2]{Daniel S.\ Katz}
+\author[3]{Arfon M.\ Smith}
 
 \affil[1]{School of Mechanical, Industrial, and Manufacturing Engineering, Oregon State University}
+\affil[2]{National Center for Supercomputing Applications \& Electrical and Computer Engineering
+Department \& \authorcr School of Information Sciences, University of Illinois at Urbana--Champaign}
+\affil[3]{Data Science Mission Office, Space Telescope Science Institute}
 
-%\affil[10]{School of Mechanical, Industrial, and Manufacturing Engineering, Oregon State University}
-
-\institute{\href{mailto:kyle.niemeyer@oregonstate.edu}{\nolinkurl{kyle.niemeyer@oregonstate.edu}}}
+\institute{
+\href{mailto:kyle.niemeyer@oregonstate.edu}{\nolinkurl{kyle.niemeyer@oregonstate.edu}} and
+\href{mailto:dskatz@illinois.edu}{\nolinkurl{dskatz@illinois.edu}} and
+\href{mailto:arfon@stsci.edu}{\nolinkurl{arfon@stsci.edu}}
+}
 
 \date{}
 
@@ -158,162 +152,70 @@
 \maketitle
 
 \begin{columns} % See Section 4.4
-    \column{0.25} % See Section 4.4
-    \block{Introduction \& Motivation}{
-    This project is developing {\fontfamily{pag}\selectfont \textbf{SLACKHA}}: a software library for accelerating the computation of chemical kinetics terms in simulations of reactive fluid flows, optimized for hybrid CPU\slash GPU processing architectures.
-    \vspace{0.75em}
-    
-    The motivations behind the project are two-pronged:
-    \begin{itemize}
-        \item The prohibitive computational cost of incorporating detailed, accurate models of chemical kinetics, and 
-        \item The trend of high-performance computing clusters towards a hybrid processing paradigm using massively parallel accelerators like GPUs.
-    \end{itemize}
-    \vspace{0.5em}
-    Reactive-flow simulations pose high computational expenses when using detailed chemical kinetic models, primarily due to
-    \begin{enumerate}
-        \item The large---and ever-increasing---model sizes, depicted in Fig.~\ref{fig:sizes}, and
-        \item Stiffness encountered when integrating the ordinary differential equations for chemical kinetics, as shown in Fig.~\ref{fig:stiffness}.
-    \end{enumerate}
-    
-    % \begin{minipage}{0.48\linewidth}
-    % \centering
-    % \begin{tikzfigure}
-    % \includegraphics[width=\linewidth]{mechanism-survey}
-    % \end{tikzfigure}
-    % \captionof{figure}{Sizes of detailed kinetic models for hydrocarbon oxidation.}\label{fig:sizes}
-    % \end{minipage}
-    % \hfill
-    % \begin{minipage}{0.49\linewidth}
-    % \centering
-    % \begin{tikzfigure}
-    % \includegraphics[width=\linewidth]{species-timescales}
-    % \end{tikzfigure}
-    % \vspace{0.25em}
-    % \captionof{figure}{Characteristic species creation timescales for CH$_4$ oxidation.}\label{fig:stiffness}
-    % \end{minipage}
-    
-    \vspace{1em}
-    
-    {\fontfamily{pag}\selectfont SLACKHA} will consist of components that can cluster chemically similar cells and detect local stiffness of chemical kinetics governing equations and adaptively select the most efficient integrator based on available hardware.
-    Improved computational performance will be demonstrated by coupling with commercial and open-source computational fluid dynamics software.
-    }
-    
-    \column{0.5}
-    \block{Components of {\fontfamily{pag}\selectfont SLACKHA}}{
-    
-    % \begin{tikzfigure}
-    % \includegraphics[width=0.75\linewidth]{SLACKHA-components}
-    % \end{tikzfigure}
-    % \captionof{figure}{Functionality of {\fontfamily{pag}\selectfont SLACKHA} with all components and connections.}
-    
-    }
-    
-    \column{0.25}
-    \block{Project Plan}{
-    The three-year project plan for the development {\fontfamily{pag}\selectfont SLACKHA} is a collaborative effort between Oregon State University and the University of Connecticut, with professional software development contributions from Dr.~Christopher Stone of Computational Science \& Engineering.
-    
-    % \begin{tikzfigure}
-    % \includegraphics[width=\linewidth]{NSF-SI2-project-timeline}
-    % \end{tikzfigure}
-    % \captionof{figure}{Three-year plan for {\fontfamily{pag}\selectfont SLACKHA} development.}
-    
-    \vspace{2em}
-    
-    Although case studies will be performed using combustion phenomena, other reacting-flow communities will be engaged, including astrophysics, atmospheric chemistry, nuclear reactions, and biochemical networks.
-    }
-\end{columns}
 
-% bottom 
-\begin{columns}
-    \column{0.25}
-    \block{Basis}{
-    Our approach to accelerating chemical kinetics relies on the operator-splitting or fractional-step technique to decouple the chemistry terms from the transport terms and other physical processes. This results in a large system of independent ODEs that need to be integrated each time step:
-    
-    % \begin{tikzfigure}
-    % \includegraphics[width=\linewidth]{chemistry-decoupling}
-    % \end{tikzfigure}
-    % \captionof{figure}{Depiction of decoupling of chemical kinetics ODEs in reactive-flow simulations using operator splitting.\textsuperscript{a}}
-    }
+    \column{0.7}
+    \block{Software Citation Principles}{
 
-    \column{0.25}
-    \block{Products}{
-    \begin{enumerate}[leftmargin=1cm,topsep=0pt]
-        
-        \item NJ Curtis \& KE Niemeyer. \texttt{accelerInt}. GitHub: \url{https://github.com/SLACKHA/accelerInt}.
-        v1.0 (2017): \doi{10.5281/zenodo.230256}
-        
-        \item KE Niemeyer \& NJ Curtis. \texttt{pyJac}. GitHub: \url{https://github.com/SLACKHA/pyJac}.
-        v1.0.2 (2017): \doi{10.5281/zenodo.251144}
-        
-        %\item Andrew Alferman \& Kyle E.\ Niemeyer. ``Investigation of stiffness detection metrics for chemical kinetics.'' In preparation.
-        
-        \item CP Stone, AT Alferman, \& KE Niemeyer.
-        ``Accelerating finite-rate chemical kinetics with coprocessors: comparing vectorization methods on GPUs, MICs, and CPUs.'' (2017) In preparation, available via {\tt \href{http://arxiv.org/abs/1608.05794}{arXiv:1608.05794} [physics.comp-ph]}.
-        
-        \item KE Niemeyer, NJ Curtis, \& CJ Sung. ``\texttt{pyJac}: analytical Jacobian generator for chemical kinetics.'' (2017) \textit{Computer Physics Communications}, in press. \doi{10.1016/j.cpc.2017.02.004} 
-        
-        \item NJ Curtis, KE Niemeyer, \& CJ Sung. ``An investigation of GPU-based stiff chemical kinetics integration methods.'' (2017) \textit{Combustion \& Flame}, in press. \doi{10.1016/j.combustflame.2017.02.005}
-        %
-        %\item Kyle E.\ Niemeyer, Nicholas J.\ Curtis, and Chih-Jen Sung. ``Initial investigation of \texttt{pyJac}: an analytical Jacobian generator for chemical kinetics.'' Fall 2015 Meeting of the Western States Section of the Combustion Institute, Provo, UT, USA. 5--6 October 2015. \href{https://dx.doi.org/10.6084/m9.figshare.2075515.v1}{\nolinkurl{doi:10.6084/m9.figshare.2075515.v1}}
-    \end{enumerate}
-    %\vspace{0.1em}
-    }
-    
-    \column{0.25}
-    \block{Acknowledgements}{
-    This work is supported by NSF grants ACI-1535065 and ACI-1534688. We also acknowledge the efforts of graduate research assistants Nicholas Curtis (UConn) and Andrew Alferman (Oregon State), and undergraduate research assistant Parker Clayton (Oregon State).
-    \\ \\
-    \begin{minipage}{0.42\linewidth}
     \begin{tikzfigure}
-    \includegraphics[width=\linewidth]{cc-by}
+    \includegraphics[width=0.95\linewidth]{full-white}
     \end{tikzfigure}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.55\linewidth}
-    This work is licensed under a Creative Commons Attribution 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by/4.0/}.
-    \end{minipage}
-    
-    \vspace{2.5em}
-    \innerblock{Image credits}{
-    \small{
-    a: Modified from \url{https://www.olcf.ornl.gov/wp-content/uploads/2011/06/Oefelein2_web.png}, 
-    b: Weber et al., \emph{Combust Flame} (2014) \doi{10.1016/j.combustflame.2014.01.018}
-    c: Intel Skylake CPU \url{http://wimages.vr-zone.net/2015/04/Intel.jpg}
-    d: NVIDIA Tesla K40 \url{http://www.wiredzone.com/mmenglish/Images/actual}
-    e: Intel Xeon Phi \url{https://streamcomputing.eu/wp-content/uploads/2012/11/intel-xeon-phi-card.jpg}
-    }}
+    %
     }
-    
-    \column{0.25}
-    \block{Further Information}{
-    {\colorlet{innerblocktitlebgcolor}{OSUorange}
-    \colorlet{innerblocktitlefgcolor}{white}
-    \innerblock{Niemeyer Research Group (OSU)}{\centering{\url{http://kyleniemeyer.com}}}
-    }
-    {\colorlet{innerblocktitlebgcolor}{UConnBlue}
-    \colorlet{innerblocktitlefgcolor}{white}
-    \innerblock{Combustion Diagnostics Laboratory (UConn)}{\centering{\url{http://combdiaglab.engr.uconn.edu}}}
-    }
-    
-    \vspace{2.5em}
-    
-    \begin{minipage}{\linewidth}
-    \centering
-    {\fontfamily{pag}\selectfont 
-    \Huge
-    \textbf{SLACKHA}
-    }
-    \end{minipage}
-    \vspace{1em}
-    
-    {\colorlet{innerblocktitlebgcolor}{GoogleBlue}
-    \colorlet{innerblocktitlefgcolor}{white}
-    \innerblock{Project discussion forum}{\centering{\url{https://groups.google.com/d/forum/slackha-users}}}
-    }
-    \innerblock{Project homepage}{\centering{\url{http://slackha.github.io/}}}
-    }
-    
-\end{columns}
 
+    \column{0.3}
+    \block{Organizations}{
+
+    \begin{tikzfigure}
+    \includegraphics[width=0.85\linewidth]{logo-CMYK-horizontal}
+    \end{tikzfigure}
+    \captionof*{figure}{\url{https://www.force11.org/group/software-citation-working-group}}
+
+    %\vspace{1em}
+
+    \begin{tikzfigure}
+    \includegraphics[width=0.7\linewidth]{OSU-color-horz}
+    \end{tikzfigure}
+    \begin{tikzfigure}
+    \includegraphics[width=0.75\linewidth]{uclogo_horz_bold}
+    \end{tikzfigure}
+    \begin{tikzfigure}
+    \includegraphics[width=0.75\linewidth]{stsci_pri_combo_mark_horizonal_white_bkgd}
+    \end{tikzfigure}
+    }
+
+    \block{Further Information}{
+    %
+    \begin{enumerate}[leftmargin=1cm,topsep=0pt]
+
+        \item AM Smith, DS Katz, KE Niemeyer, \& FORCE11 Software Citation Working Group.
+        ``Software citation principles.'' (2016) \textit{PeerJ Computer Science}, 2:e86.
+        \doi{10.7717/peerj-cs.86}
+
+        \item KE Niemeyer, AM Smith, \& DS Katz.
+        ``The challenge and promise of software citation for credit, identification, discovery, and reuse.'' (2016) \textit{ACM Journal of Data and Information Quality}, 7(4):16.
+        \doi{10.1145/2968452}
+
+        \item DS Katz, KE Niemeyer, \& AM Smith.
+        ``Strategies for biomedical software management, sharing, and citation.'' (2016) \textit{PeerJ Preprints} 4:e2640v1.
+        \doi{10.7287/peerj.preprints.2640v1}
+
+        \item DS Katz, KE Niemeyer, AM Smith, WL Anderson, C Boettiger, K Hinsen, R Hooft, M Hucka, A Lee, F L\"{o}ffler, T Pollard, \& F Rios.
+        ``Software vs.\ data in the context of citation.'' (2016) \textit{PeerJ Preprints} 4:e2630v1.
+        \doi{10.7287/peerj.preprints.2630v1}
+
+        \end{enumerate}
+
+        \begin{minipage}{0.42\linewidth}
+            \begin{tikzfigure}
+                \includegraphics[width=\linewidth]{cc-by}
+            \end{tikzfigure}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.55\linewidth}
+        This work is licensed under a Creative Commons Attribution 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by/4.0/}.
+        \end{minipage}
+    %
+    }
+\end{columns}
 
 \end{document}
